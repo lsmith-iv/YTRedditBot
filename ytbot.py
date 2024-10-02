@@ -2,6 +2,8 @@
 # inspired heavily by https://github.com/Shifty-The-Dev/RedditVideoGenerator
 import praw
 import sys
+import numpy as np
+import tts
 
 # Use Praw (Python Reddit API Wrapper) to retrieve data from Reddit
 reddit = praw.Reddit(
@@ -18,8 +20,9 @@ subreddit = reddit.subreddit(subreddit)
 for submission in subreddit.top(time_filter="day", limit=1):
     print(submission.title, submission.selftext)
 
-# Generate speech using TTS
-# TODO: implement using pyttsx3
+    # Generate speech for video
+    tts.text_to_speech(fileName="audio", text=submission.selftext)
+    # TODO: Fix tts. Currently grabs only last few seconds of text
 
 # Use MoviePy to edit together video
 
